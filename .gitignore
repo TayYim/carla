@@ -47,3 +47,5 @@ _out*
 _site
 core
 profiler.csv
+Unreal/CarlaUE4/.ignore
+Unreal/CarlaUE4/Config/OptionalModules.ini
