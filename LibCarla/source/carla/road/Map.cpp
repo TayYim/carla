@@ -58,7 +58,8 @@ namespace road {
     if (lane.GetId() > 0) {
       return lane.GetDistance() + 10.0 * EPSILON;
     } else {
-      return lane.GetDistance() + lane.GetLength() - 10.0 * EPSILON;
+      // TODO: workaround. Making it smaller to pass the GetWaypoint()
+      return lane.GetDistance() + lane.GetLength() - 100.0 * EPSILON; 
     }
   }
 
@@ -224,7 +225,7 @@ namespace road {
   boost::optional<Waypoint> Map::GetWaypoint(
       RoadId road_id,
       LaneId lane_id,
-      float s) const {
+      double s) const {
 
     // define the waypoint with the known parameters
     Waypoint waypoint;
@@ -719,7 +720,7 @@ namespace road {
       ForEachDrivableLane(road, [&](auto &&waypoint) {
         auto successors = GetSuccessors(waypoint);
         if (successors.size() == 0){
-          auto distance = static_cast<float>(GetDistanceAtEndOfLane(GetLane(waypoint)));
+          auto distance = GetDistanceAtEndOfLane(GetLane(waypoint));
           auto last_waypoint = GetWaypoint(waypoint.road_id, waypoint.lane_id, distance);
           if (last_waypoint.has_value()){
             result.push_back({waypoint, *last_waypoint});

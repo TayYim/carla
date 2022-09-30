@@ -60,7 +60,7 @@ namespace road {
     boost::optional<element::Waypoint> GetWaypoint(
         RoadId road_id,
         LaneId lane_id,
-        float s) const;
+        double s) const;
 
     geom::Transform ComputeTransform(Waypoint waypoint) const;
 
